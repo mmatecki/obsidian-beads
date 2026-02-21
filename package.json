@@ -1,0 +1,29 @@
+{
+	"name": "obsidian-beads",
+	"version": "0.0.1",
+	"description": "Obsidian plugin for Beads issue tracking",
+	"main": "main.js",
+	"scripts": {
+		"dev": "node esbuild.config.mjs",
+		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+		"test": "vitest run",
+		"test:watch": "vitest"
+	},
+	"keywords": [],
+	"author": "Maciej Matecki",
+	"license": "MIT",
+	"devDependencies": {
+		"@codemirror/commands": "^6.10.2",
+		"@types/cytoscape": "^3.21.9",
+		"@types/node": "^20.19.33",
+		"builtin-modules": "^3.3.0",
+		"esbuild": "0.25.5",
+		"tslib": "^2.8.1",
+		"typescript": "^5.8.3",
+		"vitest": "^4.0.18"
+	},
+	"dependencies": {
+		"cytoscape": "^3.30.2",
+		"obsidian": "latest"
+	}
+}

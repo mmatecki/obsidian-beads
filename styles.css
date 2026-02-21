@@ -1,0 +1,1313 @@
+.beads-root {
+	padding: var(--size-4-2);
+}
+
+.beads-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: var(--size-4-1) var(--size-4-2);
+	margin-bottom: var(--size-4-1);
+}
+
+.beads-header-title {
+	font-weight: var(--font-semibold);
+	font-size: var(--font-ui-small);
+	color: var(--text-muted);
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+.beads-add-project-btn {
+	color: var(--text-muted);
+}
+
+.beads-add-project-btn:hover {
+	color: var(--text-normal);
+}
+
+.beads-tree-item {
+	display: flex;
+	align-items: center;
+	gap: var(--size-4-1);
+	padding: var(--size-4-1) var(--size-4-2);
+	border-radius: var(--radius-s);
+	color: var(--text-normal);
+	cursor: default;
+}
+
+.beads-tree-item:hover {
+	background-color: var(--background-modifier-hover);
+}
+
+.beads-project-row {
+	cursor: pointer;
+}
+
+.beads-chevron {
+	display: flex;
+	align-items: center;
+	color: var(--text-faint);
+	flex-shrink: 0;
+}
+
+.beads-chevron-spacer {
+	display: inline-block;
+	width: var(--icon-size);
+	flex-shrink: 0;
+}
+
+.beads-project-icon {
+	display: flex;
+	align-items: center;
+	color: var(--text-muted);
+}
+
+.beads-project-name {
+	flex: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.beads-children {
+	padding-left: var(--size-4-4);
+}
+
+.beads-issue-row {
+	font-size: var(--font-ui-small);
+	cursor: pointer;
+}
+
+.beads-issue-status {
+	display: flex;
+	align-items: center;
+	flex-shrink: 0;
+}
+
+.beads-status-closed,
+.beads-status-done {
+	color: var(--text-success);
+}
+
+.beads-status-in_progress {
+	color: var(--text-accent);
+}
+
+.beads-status-blocked {
+	color: var(--text-error);
+}
+
+.beads-status-open {
+	color: var(--text-muted);
+}
+
+.beads-issue-id {
+	color: var(--text-faint);
+	font-size: var(--font-ui-smaller);
+	flex-shrink: 0;
+}
+
+.beads-issue-title {
+	flex: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.beads-loading {
+	padding: var(--size-4-1) var(--size-4-2);
+	color: var(--text-faint);
+	font-size: var(--font-ui-smaller);
+}
+
+.beads-error {
+	padding: var(--size-4-1) var(--size-4-2);
+	color: var(--text-error);
+	font-size: var(--font-ui-smaller);
+}
+
+.beads-empty-state {
+	padding: var(--size-4-2);
+	color: var(--text-faint);
+	font-size: var(--font-ui-smaller);
+	text-align: center;
+}
+
+.beads-issue-detail {
+	padding: var(--size-4-3);
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.beads-issue-actions {
+	display: flex;
+	gap: var(--size-4-2);
+	margin-bottom: var(--size-4-4);
+}
+
+.beads-action-btn {
+	padding: var(--size-4-1) var(--size-4-3);
+	border-radius: var(--radius-s);
+	background-color: var(--interactive-normal);
+	color: var(--text-normal);
+	border: 1px solid var(--background-modifier-border);
+	cursor: pointer;
+	font-size: var(--font-ui-small);
+}
+
+.beads-action-btn:hover {
+	background-color: var(--interactive-hover);
+}
+
+.beads-issue-content table {
+	width: 100%;
+	margin-bottom: var(--size-4-4);
+}
+
+.beads-issue-content table td:first-child {
+	width: 120px;
+	white-space: nowrap;
+}
+
+/* Issue type badge */
+.beads-issue-type {
+	font-size: var(--font-ui-smaller);
+	padding: 1px 6px;
+	border-radius: var(--radius-s);
+	background-color: var(--background-modifier-hover);
+	color: var(--text-muted);
+	flex-shrink: 0;
+}
+
+.beads-type-epic {
+	background-color: var(--color-purple);
+	color: var(--text-on-accent);
+}
+
+.beads-type-feature {
+	background-color: var(--color-blue);
+	color: var(--text-on-accent);
+}
+
+/* Add issue button on project/issue rows */
+.beads-add-issue-btn {
+	color: var(--text-faint);
+	opacity: 0;
+	transition: opacity 100ms ease;
+	background: none;
+	border: none;
+	padding: 2px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+}
+
+.beads-project-row:hover .beads-add-issue-btn,
+.beads-issue-row:hover .beads-add-issue-btn {
+	opacity: 1;
+}
+
+.beads-add-issue-btn:hover {
+	color: var(--text-normal);
+}
+
+/* Settings — issue type list */
+.beads-settings-type-list {
+	margin-bottom: var(--size-4-4);
+}
+
+.beads-settings-type-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: var(--size-4-1) var(--size-4-2);
+	border-radius: var(--radius-s);
+}
+
+.beads-settings-type-row:hover {
+	background: var(--background-modifier-hover);
+}
+
+.beads-settings-type-row .setting-item {
+	border: none;
+	padding: 0;
+}
+
+.beads-settings-type-name {
+	font-family: var(--font-monospace);
+	font-size: var(--font-ui-small);
+	color: var(--text-normal);
+}
+
+/* Drag & drop */
+.beads-dragging {
+	opacity: 0.4;
+}
+
+.beads-drop-target {
+	background-color: var(--background-modifier-active-hover) !important;
+	outline: 2px solid var(--interactive-accent);
+	outline-offset: -2px;
+	border-radius: var(--radius-s);
+}
+
+/* ══════════════════════════════════════════════════════
+   Create / Edit Bead form
+   ══════════════════════════════════════════════════════ */
+
+.beads-create-form {
+	padding: 14px 32px 48px;
+	width: 100%;
+	max-width: min(820px, 100%);
+	margin: 0 auto;
+	box-sizing: border-box;
+	overflow-y: auto;
+}
+
+/* ── Form header (matches view screen header style) ── */
+.beads-form-header {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	margin-bottom: 20px;
+}
+
+.beads-form-heading {
+	font-size: var(--inline-title-size, var(--h1-size, 2em));
+	font-weight: var(--inline-title-weight, var(--font-bold));
+	color: var(--inline-title-color, var(--text-normal));
+	font-family: var(--inline-title-font, inherit);
+	line-height: 1.2;
+	margin: 0;
+}
+
+/* Vertical stack with 24 px rhythm between sections */
+.beads-form-body {
+	padding-top: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+/* ── Title ── */
+.beads-title-input {
+	width: 100%;
+	padding: 4px 0;
+	border: none;
+	border-bottom: 2px solid var(--background-modifier-border);
+	border-radius: 0;
+	background: transparent;
+	color: var(--text-normal);
+	font-size: var(--h2-size, 1.5em);
+	font-weight: var(--font-semibold);
+	box-sizing: border-box;
+	line-height: 1.3;
+}
+
+.beads-title-input:focus {
+	border-bottom-color: var(--interactive-accent);
+	outline: none;
+	box-shadow: none;
+}
+
+.beads-title-input::placeholder { color: var(--text-faint); }
+
+/* ── Metadata rows ── */
+.beads-meta-row {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: var(--size-4-3);
+}
+
+.beads-meta-row--2col {
+	grid-template-columns: repeat(2, 1fr);
+}
+
+.beads-meta-field {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	min-width: 0;
+}
+
+.beads-meta-label {
+	font-size: 10px;
+	font-weight: var(--font-semibold);
+	color: var(--text-muted);
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+}
+
+.beads-meta-select,
+.beads-meta-input {
+	width: 100%;
+	padding: var(--size-4-1) var(--size-4-2);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-s);
+	background: var(--background-modifier-form-field, var(--background-primary));
+	color: var(--text-normal);
+	font-size: var(--font-ui-small);
+	box-sizing: border-box;
+	height: var(--input-height, 30px);
+}
+
+.beads-meta-select:focus,
+.beads-meta-input:focus {
+	border-color: var(--interactive-accent);
+	outline: none;
+}
+
+.beads-meta-input::placeholder { color: var(--text-faint); }
+
+/* ── Section heading ── */
+.beads-section-label {
+	font-size: var(--h3-size, 1.1em);
+	font-weight: var(--font-semibold);
+	color: var(--text-normal);
+	margin: 0;
+	padding-bottom: 6px;
+	border-bottom: 1px solid var(--background-modifier-border);
+	margin-bottom: 6px;
+}
+
+/* ── Labels ── */
+.beads-labels-row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 8px;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-s);
+	background: var(--background-modifier-form-field, var(--background-primary));
+	min-height: 34px;
+}
+
+/* pill-style "+ add label" button */
+.beads-add-pill {
+	display: inline-flex;
+	align-items: center;
+	padding: 2px 10px;
+	border-radius: var(--radius-l);
+	background: none;
+	border: 1px dashed var(--background-modifier-border);
+	color: var(--text-faint);
+	font-size: var(--font-ui-smaller);
+	cursor: pointer;
+	line-height: 1.4;
+}
+
+.beads-add-pill:hover {
+	border-color: var(--interactive-accent);
+	color: var(--interactive-accent);
+}
+
+/* inline text input that replaces "+ add label" */
+.beads-label-inline-input {
+	border: none;
+	background: transparent;
+	color: var(--text-normal);
+	font-size: var(--font-ui-smaller);
+	outline: none;
+	min-width: 90px;
+	padding: 2px 4px;
+}
+
+.beads-label-inline-input::placeholder { color: var(--text-faint); }
+
+/* label preset chips row */
+.beads-label-presets {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	margin-top: 6px;
+}
+
+.beads-label-preset-chip {
+	display: inline-flex;
+	align-items: center;
+	padding: 2px 8px;
+	border-radius: 10px;
+	border: 1px dashed var(--background-modifier-border);
+	background: transparent;
+	color: var(--text-faint);
+	font-size: var(--font-ui-smaller);
+	cursor: pointer;
+	transition: border-color 0.1s, color 0.1s;
+}
+
+.beads-label-preset-chip:hover {
+	border-color: var(--interactive-accent);
+	color: var(--interactive-accent);
+}
+
+/* ── Shared pill style ── */
+.beads-dep-chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	padding: 2px 8px;
+	border-radius: var(--radius-l);
+	background-color: var(--interactive-normal);
+	border: 1px solid var(--background-modifier-border);
+	font-size: var(--font-ui-smaller);
+	white-space: nowrap;
+}
+
+.beads-dep-chip-id {
+	color: var(--text-muted);
+	font-family: var(--font-monospace);
+}
+
+.beads-dep-chip-remove {
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: var(--text-faint);
+	padding: 0;
+	line-height: 1;
+	font-size: var(--font-ui-small);
+}
+
+.beads-dep-chip-remove:hover { color: var(--text-error); }
+
+/* ── Parent selector ── */
+.beads-parent-pill-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin-bottom: 4px;
+}
+
+.beads-change-parent-link {
+	display: inline;
+	background: none;
+	border: none;
+	padding: 0;
+	font-size: var(--font-ui-smaller);
+	color: var(--text-faint);
+	cursor: pointer;
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+
+.beads-change-parent-link:hover { color: var(--interactive-accent); }
+
+.beads-parent-search-area {
+	margin-top: 6px;
+}
+
+/* ── Description ── */
+.beads-description-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 6px;
+}
+
+.beads-description-label {
+	font-size: var(--font-ui-small);
+	font-weight: var(--font-semibold);
+	color: var(--text-normal);
+}
+
+.beads-desc-toggle {
+	color: var(--text-muted);
+	background: none;
+	border: none;
+	padding: 2px 4px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	border-radius: var(--radius-s);
+}
+
+.beads-desc-toggle:hover {
+	color: var(--text-normal);
+	background-color: var(--background-modifier-hover);
+}
+
+.beads-description-editor {
+	display: block;
+	width: 100%;
+	resize: vertical;
+	padding: var(--size-4-2) var(--size-4-3);
+	font-family: var(--font-monospace);
+	font-size: var(--font-ui-small);
+	line-height: var(--line-height-normal);
+	color: var(--text-normal);
+	background-color: var(--background-modifier-form-field, var(--background-primary));
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-s);
+	box-sizing: border-box;
+	tab-size: 4;
+}
+
+.beads-description-editor:focus {
+	border-color: var(--interactive-accent);
+	outline: none;
+	box-shadow: 0 0 0 2px var(--background-modifier-border-focus);
+}
+
+.beads-description-editor::placeholder { color: var(--text-faint); }
+
+.beads-md-preview {
+	min-height: 240px;
+	padding: var(--size-4-3);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-s);
+	overflow-y: auto;
+	font-size: var(--font-ui-small);
+	line-height: var(--line-height-normal);
+	color: var(--text-normal);
+	background-color: var(--background-modifier-form-field, var(--background-primary));
+}
+
+/* ── Notes / Design textareas ── */
+.beads-notes-editor {
+	display: block;
+	width: 100%;
+	resize: vertical;
+	padding: var(--size-4-2) var(--size-4-3);
+	font-family: var(--font-text);
+	font-size: var(--font-ui-small);
+	line-height: var(--line-height-normal);
+	color: var(--text-normal);
+	background-color: var(--background-modifier-form-field, var(--background-primary));
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-s);
+	box-sizing: border-box;
+}
+
+.beads-notes-editor:focus {
+	border-color: var(--interactive-accent);
+	outline: none;
+	box-shadow: 0 0 0 2px var(--background-modifier-border-focus);
+}
+
+.beads-notes-editor::placeholder { color: var(--text-faint); }
+
+/* ── Dependencies — collapsible ── */
+.beads-deps-header {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	cursor: pointer;
+	user-select: none;
+	padding: 2px 0;
+}
+
+.beads-deps-header:hover .beads-deps-title { color: var(--text-accent); }
+
+.beads-deps-arrow {
+	font-size: 10px;
+	color: var(--text-muted);
+	flex-shrink: 0;
+	width: 12px;
+}
+
+.beads-deps-title {
+	font-size: var(--font-ui-small);
+	font-weight: var(--font-semibold);
+	color: var(--text-normal);
+}
+
+.beads-deps-count {
+	font-size: var(--font-ui-smaller);
+	color: var(--text-faint);
+}
+
+.beads-deps-body {
+	margin-top: 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+/* One dep-type block: pill row on top, search area below */
+.beads-dep-block {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+/* LABEL: [pills...] [+ Add] */
+.beads-dep-row {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	min-height: 26px;
+}
+
+.beads-dep-row-label {
+	flex-shrink: 0;
+	width: 120px;
+	font-size: var(--font-ui-smaller);
+	font-weight: var(--font-semibold);
+	color: var(--text-muted);
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+.beads-dep-row-pills {
+	flex: 1;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	align-items: center;
+}
+
+/* "+ Add" button at the right of each dep row */
+.beads-dep-add-btn {
+	flex-shrink: 0;
+	background: none;
+	border: none;
+	padding: 2px 6px;
+	font-size: var(--font-ui-smaller);
+	color: var(--text-faint);
+	cursor: pointer;
+	border-radius: var(--radius-s);
+	white-space: nowrap;
+}
+
+.beads-dep-add-btn:hover {
+	color: var(--interactive-accent);
+	background: var(--background-modifier-hover);
+}
+
+/* Search area below the dep row */
+.beads-dep-search-area {
+	padding-left: 128px; /* align under the pills (label width + gap) */
+}
+
+/* ── Shared search dropdown ── */
+.beads-deps-search-wrap {
+	position: relative;
+}
+
+.beads-deps-input {
+	width: 100%;
+	padding: var(--size-4-1) var(--size-4-2);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-s);
+	background: var(--background-modifier-form-field, var(--background-primary));
+	color: var(--text-normal);
+	font-size: var(--font-ui-small);
+	box-sizing: border-box;
+}
+
+.beads-deps-input:focus {
+	border-color: var(--interactive-accent);
+	outline: none;
+}
+
+.beads-deps-dropdown {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	z-index: 100;
+	background: var(--background-primary);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-s);
+	box-shadow: var(--shadow-l);
+	max-height: 220px;
+	overflow-y: auto;
+	margin-top: 2px;
+}
+
+.beads-deps-dropdown-item {
+	display: flex;
+	align-items: center;
+	gap: var(--size-4-2);
+	padding: var(--size-4-1) var(--size-4-2);
+	cursor: pointer;
+	font-size: var(--font-ui-small);
+}
+
+.beads-deps-dropdown-item:hover { background: var(--background-modifier-hover); }
+
+.beads-dep-item-id {
+	color: var(--text-faint);
+	font-family: var(--font-monospace);
+	font-size: var(--font-ui-smaller);
+	flex-shrink: 0;
+}
+
+.beads-dep-item-title {
+	color: var(--text-normal);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* ── Action bar ── */
+.beads-action-bar-divider {
+	border: none;
+	border-top: 1px solid var(--background-modifier-border);
+	margin: 0;
+}
+
+.beads-action-bar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.beads-cancel-btn {
+	padding: var(--size-4-1) var(--size-4-3);
+	border-radius: var(--radius-s);
+	background: none;
+	border: 1px solid var(--background-modifier-border);
+	color: var(--text-muted);
+	font-size: var(--font-ui-small);
+	cursor: pointer;
+}
+
+.beads-cancel-btn:hover {
+	background: var(--background-modifier-hover);
+	color: var(--text-normal);
+}
+
+.beads-submit-btn {
+	padding: var(--size-4-1) var(--size-4-4);
+	border-radius: var(--radius-s);
+	font-size: var(--font-ui-small);
+	cursor: pointer;
+}
+
+/* ── Compat: Settings tab uses Obsidian Setting component ── */
+.beads-settings-container { padding-top: var(--size-4-2); }
+
+.beads-settings-container .setting-item-control {
+	flex: 1;
+	min-width: 0;
+}
+
+.beads-settings-container .setting-item-control input[type="text"] {
+	width: 100%;
+	max-width: 360px;
+}
+
+.beads-setting-textarea .setting-item-control { flex-grow: 1; }
+.beads-setting-textarea textarea { width: 100%; resize: vertical; }
+
+/* ══════════════════════════════════════════════════════
+   View Bead screen
+   ══════════════════════════════════════════════════════ */
+
+.beads-view-screen {
+	padding: 14px 32px 48px;
+	max-width: min(820px, 100%);
+	margin: 0 auto;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	gap: 0; /* sections control their own spacing via margin-bottom */
+}
+
+/* ── Header ── */
+.beads-view-header {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin-bottom: 16px;
+}
+
+.beads-view-back-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	background: none;
+	border: none;
+	padding: 0;
+	color: var(--text-faint);
+	font-size: var(--font-ui-smaller);
+	cursor: pointer;
+	align-self: flex-start;
+}
+
+.beads-view-back-btn:hover { color: var(--text-accent); }
+
+.beads-view-back-icon {
+	display: flex;
+	align-items: center;
+}
+
+.beads-view-title-row {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 16px;
+}
+
+.beads-view-title-block {
+	flex: 1;
+	min-width: 0;
+}
+
+/* H1 — match Obsidian's inline-title size */
+.beads-view-title {
+	font-size: var(--inline-title-size, var(--h1-size, 2em));
+	font-weight: var(--inline-title-weight, var(--font-bold));
+	color: var(--inline-title-color, var(--text-normal));
+	font-family: var(--inline-title-font, inherit);
+	margin: 0 0 2px 0;
+	line-height: 1.2;
+}
+
+/* ID in same style as Obsidian's metadata labels */
+.beads-view-issue-id {
+	font-family: var(--font-monospace);
+	font-size: var(--font-ui-smaller);
+	color: var(--text-faint);
+	letter-spacing: 0.02em;
+	margin-bottom: 4px;
+}
+
+.beads-view-parent-breadcrumb {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	margin-top: 4px;
+}
+
+.beads-view-breadcrumb-label {
+	font-size: var(--font-ui-smaller);
+	color: var(--text-faint);
+}
+
+.beads-view-nav-pill {
+	display: inline-flex;
+	align-items: center;
+	padding: 1px 7px;
+	border-radius: var(--radius-l);
+	background: var(--interactive-normal);
+	border: 1px solid var(--background-modifier-border);
+	font-size: var(--font-ui-smaller);
+	font-family: var(--font-monospace);
+	color: var(--text-muted);
+	cursor: pointer;
+}
+
+.beads-view-nav-pill:hover {
+	background: var(--interactive-hover);
+	color: var(--text-accent);
+}
+
+/* Align actions with first line of title text */
+.beads-view-header-actions {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	flex-shrink: 0;
+	padding-top: 6px; /* visual alignment with title baseline */
+}
+
+.beads-view-edit-btn {
+	padding: var(--size-4-1) var(--size-4-3);
+	border-radius: var(--radius-s);
+	font-size: var(--font-ui-small);
+	cursor: pointer;
+	white-space: nowrap;
+}
+
+.beads-view-more-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 28px;
+	height: 28px;
+	background: none;
+	border: none;
+	border-radius: var(--radius-s);
+	color: var(--text-muted);
+	cursor: pointer;
+}
+
+.beads-view-more-btn:hover {
+	background: var(--background-modifier-hover);
+	color: var(--text-normal);
+}
+
+/* ── Compact two-column metadata card ── */
+.beads-view-meta-card {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 4px 8px;
+	border-radius: var(--radius-s);
+	background: var(--background-secondary);
+	gap: 0;
+	margin-bottom: 28px;
+}
+
+/* Each field is 50% width → two per row */
+.beads-view-meta-field {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	flex: 0 0 50%;
+	min-width: 140px;
+	padding: 3px 6px;
+	box-sizing: border-box;
+}
+
+/* Full-width field (e.g. Labels) */
+.beads-view-meta-field--full {
+	flex: 0 0 100%;
+}
+
+.beads-view-prop-label {
+	flex-shrink: 0;
+	width: 60px;
+	font-size: 10px;
+	font-weight: var(--font-semibold);
+	color: var(--text-muted);
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+}
+
+.beads-view-prop-value {
+	flex: 1;
+	font-size: var(--font-ui-small);
+	color: var(--text-normal);
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 4px;
+	min-width: 0;
+}
+
+/* Status colors */
+.beads-view-status-open { color: var(--text-muted); }
+.beads-view-status-in_progress { color: var(--text-accent); }
+.beads-view-status-blocked { color: var(--text-error); }
+.beads-view-status-closed,
+.beads-view-status-done { color: var(--text-success); }
+
+.beads-view-ts {
+	color: var(--text-faint);
+	font-size: var(--font-ui-smaller);
+}
+
+.beads-view-close-reason {
+	color: var(--text-muted);
+	font-size: var(--font-ui-smaller);
+	font-style: italic;
+	margin-left: 4px;
+}
+
+/* ── Description — Obsidian reading-mode markdown ── */
+.beads-view-description {
+	line-height: 1.6;
+	padding: 0 !important;   /* override any markdown-rendered theme padding */
+	margin-bottom: 16px;
+	animation: beads-fadein 0.18s ease-out;
+}
+
+/* Collapse outer margins so the block sits flush with surrounding spacing */
+.beads-view-description > *:first-child { margin-top: 0 !important; }
+.beads-view-description > *:last-child  { margin-bottom: 0 !important; }
+
+/* Paragraph spacing within description */
+.beads-view-description p { margin-top: 0; margin-bottom: 0.8em; }
+.beads-view-description p:last-child { margin-bottom: 0; }
+
+@keyframes beads-fadein {
+	from { opacity: 0; transform: translateY(3px); }
+	to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Notes / Design callout wrappers ── */
+.beads-view-notes,
+.beads-view-design {
+	line-height: 1.6;
+	margin-bottom: 16px;
+}
+
+/* Suppress extra space Obsidian themes add inside callouts */
+.beads-view-notes .callout,
+.beads-view-design .callout {
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+}
+
+/* ── Section (Dependencies, etc.) ── */
+.beads-view-section {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	/* No margin-top: the preceding description/notes margin-bottom provides separation */
+}
+
+.beads-view-section-title {
+	font-size: var(--h3-size, 1.1em);
+	font-weight: var(--font-semibold);
+	color: var(--text-normal);
+	margin: 0;
+	padding-bottom: 6px;
+	border-bottom: 1px solid var(--background-modifier-border);
+}
+
+/* ── Dependency groups ── */
+.beads-view-deps {
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+}
+
+.beads-view-dep-group {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+}
+
+.beads-view-dep-group-label {
+	font-size: var(--font-ui-smaller);
+	font-weight: var(--font-semibold);
+	color: var(--text-muted);
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	margin-bottom: 3px;
+}
+
+.beads-view-dep-rows {
+	display: flex;
+	flex-direction: column;
+	gap: 1px;
+}
+
+/* Link-card row */
+.beads-view-dep-row {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	width: 100%;
+	padding: 4px 6px;
+	border-radius: var(--radius-s);
+	background: none;
+	border: none;
+	text-align: left;
+	cursor: pointer;
+	color: var(--text-normal);
+	font-size: var(--font-ui-small);
+}
+
+.beads-view-dep-row:hover {
+	background: var(--background-modifier-hover);
+}
+
+.beads-view-dep-icon {
+	display: flex;
+	align-items: center;
+	flex-shrink: 0;
+}
+
+.beads-view-dep-id {
+	font-family: var(--font-monospace);
+	font-size: var(--font-ui-smaller);
+	color: var(--text-faint);
+	flex-shrink: 0;
+}
+
+.beads-view-dep-title {
+	flex: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: var(--text-normal);
+}
+
+/* Badges pushed to the right of each dep row */
+.beads-view-dep-badges {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	margin-left: auto;
+	flex-shrink: 0;
+}
+
+.beads-view-dep-status-text {
+	font-size: var(--font-ui-smaller);
+}
+
+/* ── Edit/Create mode shared styles ── */
+
+/* Title input styled as H1 (matches beads-view-title) */
+.beads-edit-title-input {
+	width: 100%;
+	border: none;
+	border-radius: 0;
+	background: transparent;
+	color: var(--inline-title-color, var(--text-normal));
+	font-size: var(--inline-title-size, var(--h1-size, 2em));
+	font-weight: var(--inline-title-weight, var(--font-bold));
+	font-family: var(--inline-title-font, inherit);
+	line-height: 1.2;
+	padding: 0;
+	margin: 0 0 2px 0;
+	box-sizing: border-box;
+}
+
+.beads-edit-title-input:focus {
+	outline: none;
+	box-shadow: none;
+}
+
+.beads-edit-title-input::placeholder {
+	color: var(--text-faint);
+}
+
+/* Compact select/input that sits inside the dark meta card */
+.beads-meta-card-select,
+.beads-meta-card-input {
+	border: none;
+	background: transparent;
+	color: var(--text-normal);
+	font-size: var(--font-ui-small);
+	padding: 0 2px;
+	cursor: pointer;
+	max-width: 100%;
+	min-width: 0;
+}
+
+.beads-meta-card-select:focus,
+.beads-meta-card-input:focus {
+	outline: 1px solid var(--interactive-accent);
+	border-radius: 2px;
+}
+
+.beads-meta-card-input::placeholder {
+	color: var(--text-faint);
+}
+
+/* Description section inside edit/create screens */
+.beads-edit-description-section {
+	margin-bottom: 28px;
+}
+
+/* Textarea sections (Notes, Design) in edit/create screens */
+.beads-edit-textarea-section {
+	margin-bottom: 24px;
+}
+
+.beads-edit-textarea-section .beads-section-label {
+	font-size: var(--font-ui-small);
+	font-weight: var(--font-semibold);
+	color: var(--text-muted);
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	border: none;
+	padding-bottom: 4px;
+	margin-bottom: 6px;
+}
+
+/* Small chip variant for inline label/parent pickers in meta card */
+.beads-dep-chip--sm {
+	font-size: var(--font-ui-smaller);
+	padding: 1px 5px;
+}
+
+.beads-add-pill--sm {
+	font-size: var(--font-ui-smaller);
+	padding: 1px 4px;
+}
+
+/* Dependency graph view */
+.beads-graph-toolbar {
+	display: flex;
+	align-items: center;
+	gap: var(--size-4-2);
+	padding: var(--size-4-1) var(--size-4-3);
+	border-bottom: 1px solid var(--background-modifier-border);
+	flex-shrink: 0;
+}
+
+.beads-graph-refresh-btn {
+	color: var(--text-muted);
+	background: none;
+	border: none;
+	padding: 4px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	border-radius: var(--radius-s);
+}
+
+.beads-graph-refresh-btn:hover {
+	color: var(--text-normal);
+	background-color: var(--background-modifier-hover);
+}
+
+.beads-graph-container {
+	flex: 1;
+	min-height: 0;
+	position: relative;
+	background-color: var(--background-secondary);
+}
+
+.beads-graph-container canvas {
+	display: block;
+}
+
+/* ══════════════════════════════════════════════════════
+   Beads modals
+   ══════════════════════════════════════════════════════ */
+
+.beads-modal-title {
+	margin: 0 0 12px;
+	font-size: var(--font-ui-medium);
+}
+
+.beads-modal-input {
+	width: 100%;
+	margin-bottom: 12px;
+	padding: var(--size-4-2);
+	background: var(--background-modifier-form-field);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-s);
+	color: var(--text-normal);
+	font-size: var(--font-ui-small);
+	box-sizing: border-box;
+}
+
+.beads-modal-btn-row {
+	display: flex;
+	justify-content: flex-end;
+	gap: 8px;
+}
+
+
+/* ══════════════════════════════════════════════════════
+   Filter bar
+   ══════════════════════════════════════════════════════ */
+
+.beads-filter-bar {
+	display: flex;
+	gap: 4px;
+	padding: 4px var(--size-4-2);
+	border-bottom: 1px solid var(--background-modifier-border);
+	margin-bottom: 4px;
+}
+
+.beads-filter-search {
+	flex: 1;
+	min-width: 0;
+	padding: 2px 6px;
+	background: var(--background-modifier-form-field);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-s);
+	color: var(--text-normal);
+	font-size: var(--font-ui-smaller);
+}
+
+.beads-filter-status {
+	padding: 2px 4px;
+	background: var(--background-modifier-form-field);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-s);
+	color: var(--text-normal);
+	font-size: var(--font-ui-smaller);
+	max-width: 90px;
+}

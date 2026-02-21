@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+
+# Build output
+main.js
+*.map
+
+# Obsidian plugin data
+data.json
+
+# Beads issue tracking
+.beads/
+
+# System
+.DS_Store
+._.DS_Store
+._*
+src/._*

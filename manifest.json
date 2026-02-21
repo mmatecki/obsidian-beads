@@ -1,0 +1,9 @@
+{
+	"id": "obsidian-beads",
+	"name": "Beads",
+	"version": "0.0.1",
+	"minAppVersion": "0.15.0",
+	"description": "AI-native issue tracking that lives in your repo",
+	"author": "Maciej Matecki",
+	"isDesktopOnly": false
+}
