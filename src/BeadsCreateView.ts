@@ -35,6 +35,7 @@ export class BeadsCreateView extends ItemView {
 	private descPreviewEl: HTMLElement | null = null;
 	private descMode: "edit" | "preview" = "edit";
 	private labelsArray: string[] = [];
+	private submitBtn: HTMLButtonElement | null = null;
 	private formData = {
 		title: "",
 		type: "task",
@@ -120,6 +121,7 @@ export class BeadsCreateView extends ItemView {
 		const cancelBtn = headerActions.createEl("button", { cls: "beads-view-edit-btn", text: "Cancel" });
 		cancelBtn.addEventListener("click", () => this.leaf.detach());
 		const createBtn = headerActions.createEl("button", { cls: "beads-view-edit-btn mod-cta", text: "Create Bead" });
+		this.submitBtn = createBtn;
 		createBtn.addEventListener("click", () => this.handleSubmit());
 
 		// ── METADATA CARD ──────────────────────────────────────────────────
@@ -523,6 +525,7 @@ export class BeadsCreateView extends ItemView {
 			new Notice("Title is required");
 			return;
 		}
+		if (this.submitBtn) this.submitBtn.disabled = true;
 		this.createIssue({
 			...this.formData,
 			title,
@@ -549,6 +552,7 @@ export class BeadsCreateView extends ItemView {
 			if (error) {
 				console.error("Beads: bd create failed", error.message, stderr);
 				new Notice("Failed to create bead: " + (stderr || error.message));
+				if (this.submitBtn) this.submitBtn.disabled = false;
 				return;
 			}
 

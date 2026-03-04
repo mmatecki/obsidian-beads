@@ -49,6 +49,7 @@ export class BeadsEditView extends ItemView {
 	private descTextarea: HTMLTextAreaElement | null = null;
 	private descPreviewEl: HTMLElement | null = null;
 	private descMode: "edit" | "preview" = "edit";
+	private submitBtn: HTMLButtonElement | null = null;
 	private formData = {
 		title: "",
 		type: "task",
@@ -223,6 +224,7 @@ export class BeadsEditView extends ItemView {
 		const cancelBtn = headerActions.createEl("button", { cls: "beads-view-edit-btn", text: "Cancel" });
 		cancelBtn.addEventListener("click", () => this.leaf.detach());
 		const saveBtn = headerActions.createEl("button", { cls: "beads-view-edit-btn mod-cta", text: "Save" });
+		this.submitBtn = saveBtn;
 		saveBtn.addEventListener("click", () => this.handleSubmit());
 
 		// ── METADATA CARD (editable, same dark panel as view) ─────────────
@@ -640,6 +642,7 @@ export class BeadsEditView extends ItemView {
 			return;
 		}
 
+		if (this.submitBtn) this.submitBtn.disabled = true;
 		this.formData.description = this.getDescription();
 		this.formData.labels = this.labelsArray.join(", ");
 		const args = buildUpdateArgs(this.issueId, this.formData, this.originalParent);
@@ -648,6 +651,7 @@ export class BeadsEditView extends ItemView {
 			if (error) {
 				console.error("Beads: bd update failed", error.message, stderr);
 				new Notice("Failed to update bead: " + (stderr || error.message));
+				if (this.submitBtn) this.submitBtn.disabled = false;
 				return;
 			}
 
