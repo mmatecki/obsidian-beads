@@ -15,6 +15,7 @@ export interface BeadIssue {
 	parent_id?: string;
 	dependencies?: BeadDependency[];
 	created_at?: string;
+	updated_at?: string;
 }
 
 export interface BeadDepRef {
