@@ -14,6 +14,7 @@ export class BeadsView extends ItemView {
 	private draggedIssueId = "";
 	private filterStatus = "";
 	private filterSearch = "";
+	private issueCache: Map<string, Map<string, BeadIssue>> = new Map();
 
 	constructor(leaf: WorkspaceLeaf, plugin: BeadsPlugin) {
 		super(leaf);
@@ -60,6 +61,7 @@ export class BeadsView extends ItemView {
 		searchInput.value = this.filterSearch;
 		searchInput.addEventListener("input", () => {
 			this.filterSearch = searchInput.value;
+			this.issueCache.clear();
 			this.refresh();
 		});
 
@@ -78,6 +80,7 @@ export class BeadsView extends ItemView {
 		}
 		statusSel.addEventListener("change", () => {
 			this.filterStatus = statusSel.value;
+			this.issueCache.clear();
 			this.refresh();
 		});
 
@@ -226,49 +229,72 @@ export class BeadsView extends ItemView {
 	}
 
 	private loadBeads(dir: string, containerEl: HTMLElement): void {
-		containerEl.empty();
-		const loading = containerEl.createEl("div", {
-			cls: "beads-loading",
-			text: "Loading...",
-		});
+		// Show loading indicator only on initial load (empty container)
+		const isInitialLoad = containerEl.children.length === 0;
+		if (isInitialLoad) {
+			containerEl.createEl("div", { cls: "beads-loading", text: "Loading..." });
+		}
 
 		const listArgs = this.filterStatus
 			? ["list", "--json", "--limit=0", "--status", this.filterStatus]
 			: ["list", "--json", "--limit=0", "--all"];
 
-		this.plugin.runBd(
-			listArgs,
-			dir,
-			(error, stdout, stderr) => {
-				loading.remove();
+		this.plugin.runBd(listArgs, dir, (error, stdout, stderr) => {
+			containerEl.querySelector(".beads-loading")?.remove();
 
-				if (error) {
-					console.error("Beads: bd list failed", error.message, stderr);
+			if (error) {
+				console.error("Beads: bd list failed", error.message, stderr);
+				if (isInitialLoad) {
 					containerEl.createEl("div", {
 						cls: "beads-error",
 						text: "Failed to load beads",
 					});
-					return;
 				}
+				return;
+			}
 
-				let issues: BeadIssue[];
-				try {
-					issues = JSON.parse(stdout);
-				} catch {
+			let issues: BeadIssue[];
+			try {
+				issues = JSON.parse(stdout);
+			} catch {
+				if (isInitialLoad) {
 					containerEl.createEl("div", {
 						cls: "beads-error",
 						text: "Failed to parse beads",
 					});
-					return;
 				}
+				return;
+			}
 
-				// Client-side text filter
-				if (this.filterSearch) {
-					const q = this.filterSearch.toLowerCase();
-					issues = issues.filter(
-						(i) => i.id.toLowerCase().includes(q) || i.title.toLowerCase().includes(q),
-					);
-				}
+			// Client-side text filter
+			if (this.filterSearch) {
+				const q = this.filterSearch.toLowerCase();
+				issues = issues.filter(
+					(i) => i.id.toLowerCase().includes(q) || i.title.toLowerCase().includes(q),
+				);
+			}
+
+			const oldCache = this.issueCache.get(dir) || new Map<string, BeadIssue>();
+			const newCache = new Map<string, BeadIssue>();
+			for (const issue of issues) newCache.set(issue.id, issue);
+
+			const added = issues.filter((i) => !oldCache.has(i.id));
+			const removed = [...oldCache.keys()].filter((id) => !newCache.has(id));
+			const updated = issues.filter((i) => {
+				const old = oldCache.get(i.id);
+				return old && old.updated_at !== i.updated_at;
+			});
+
+			// Nothing changed — skip DOM work entirely
+			if (!isInitialLoad && added.length === 0 && removed.length === 0 && updated.length === 0) {
+				return;
+			}
+
+			this.issueCache.set(dir, newCache);
+
+			if (isInitialLoad || added.length > 0 || removed.length > 0) {
+				// Structural change — full re-render (data already in hand, no flash)
+				containerEl.empty();
 
 				if (issues.length === 0) {
 					containerEl.createEl("div", {
@@ -278,31 +304,48 @@ export class BeadsView extends ItemView {
 					return;
 				}
 
-				// Build parent->children map
-				// Use parent_id if set, otherwise infer from dotted ID
-				// e.g. "proj-8.1" is a child of "proj-8", "proj-8.1.2" is a child of "proj-8.1"
 				const { roots, childrenMap } = buildParentChildMap(issues);
-
-				// Sort newest-first at every level by created_at, falling back to trailing ID number.
-				const byNewest = (a: BeadIssue, b: BeadIssue) => {
-					if (a.created_at && b.created_at) {
-						return b.created_at.localeCompare(a.created_at);
-					}
-					const trailingNum = (id: string) =>
-						parseInt(id.match(/(\d+)$/)?.[1] ?? "0", 10);
-					return trailingNum(b.id) - trailingNum(a.id);
-				};
-
+				const byNewest = this.byNewest;
 				roots.sort(byNewest);
-				for (const siblings of childrenMap.values()) {
-					siblings.sort(byNewest);
+				for (const siblings of childrenMap.values()) siblings.sort(byNewest);
+				for (const issue of roots) this.renderBeadItem(containerEl, issue, dir, childrenMap);
+			} else {
+				// Content-only changes — update affected nodes in place
+				for (const issue of updated) {
+					this.updateBeadNodeInPlace(containerEl, issue);
 				}
+			}
+		});
+	}
 
-				for (const issue of roots) {
-					this.renderBeadItem(containerEl, issue, dir, childrenMap);
-				}
-			},
-		);
+	private readonly byNewest = (a: BeadIssue, b: BeadIssue): number => {
+		if (a.created_at && b.created_at) {
+			return b.created_at.localeCompare(a.created_at);
+		}
+		const trailingNum = (id: string) => parseInt(id.match(/(\d+)$/)?.[1] ?? "0", 10);
+		return trailingNum(b.id) - trailingNum(a.id);
+	};
+
+	private updateBeadNodeInPlace(rootEl: HTMLElement, issue: BeadIssue): void {
+		const wrapper = rootEl.querySelector(`[data-issue-id="${CSS.escape(issue.id)}"]`);
+		if (!wrapper) return;
+
+		const row = wrapper.querySelector(".beads-issue-row");
+		if (!row) return;
+
+		const statusEl = row.querySelector(".beads-issue-status") as HTMLElement | null;
+		if (statusEl) {
+			// Remove old status classes
+			const toRemove = Array.from(statusEl.classList).filter((c) =>
+				c.startsWith("beads-status-"),
+			);
+			for (const cls of toRemove) statusEl.removeClass(cls);
+			setIcon(statusEl, this.statusIcon(issue.status));
+			statusEl.addClass(`beads-status-${issue.status}`);
+		}
+
+		const titleEl = row.querySelector(".beads-issue-title") as HTMLElement | null;
+		if (titleEl) titleEl.textContent = issue.title;
 	}
 
 	private renderBeadItem(
@@ -315,7 +358,10 @@ export class BeadsView extends ItemView {
 		const hasChildren = children.length > 0;
 		const canHaveChildren = ["epic", "feature", "task"].includes(issue.issue_type);
 
-		const wrapper = containerEl.createEl("div", { cls: "beads-issue-node" });
+		const wrapper = containerEl.createEl("div", {
+			cls: "beads-issue-node",
+			attr: { "data-issue-id": issue.id },
+		});
 		const item = wrapper.createEl("div", { cls: "beads-tree-item beads-issue-row" });
 
 		// Chevron for expandable items, spacer for leaf nodes
