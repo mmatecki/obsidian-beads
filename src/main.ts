@@ -113,6 +113,15 @@ export default class BeadsPlugin extends Plugin {
 	}
 
 	async openIssue(issueId: string, projectDir: string): Promise<void> {
+		const existing = this.app.workspace.getLeavesOfType(VIEW_TYPE_BEADS_ISSUE).find((leaf) => {
+			const state = leaf.view.getState() as { issueId?: string; projectDir?: string };
+			return state.issueId === issueId && state.projectDir === projectDir;
+		});
+		if (existing) {
+			this.app.workspace.revealLeaf(existing);
+			await existing.view.setState({ issueId, projectDir }, { history: false });
+			return;
+		}
 		const leaf = this.app.workspace.getLeaf("tab");
 		await leaf.setViewState({
 			type: VIEW_TYPE_BEADS_ISSUE,
