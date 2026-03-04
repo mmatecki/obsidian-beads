@@ -16,6 +16,7 @@ interface BeadsSettings {
 	defaultPriority: string;
 	defaultIssueType: string;
 	defaultAssignee: string;
+	doltPassword: string;
 }
 
 const DEFAULT_SETTINGS: BeadsSettings = {
@@ -26,6 +27,7 @@ const DEFAULT_SETTINGS: BeadsSettings = {
 	defaultPriority: "2",
 	defaultIssueType: "task",
 	defaultAssignee: "",
+	doltPassword: "",
 };
 
 export default class BeadsPlugin extends Plugin {
@@ -79,7 +81,9 @@ export default class BeadsPlugin extends Plugin {
 		// eslint-disable-next-line @typescript-eslint/no-var-requires
 		const mod = "child_process";
 		const cp = require(mod) as typeof import("child_process");
-		cp.execFile(this.settings.bdPath, args, { cwd }, callback);
+		const env = { ...process.env };
+		if (this.settings.doltPassword) env["BEADS_DOLT_PASSWORD"] = this.settings.doltPassword;
+		cp.execFile(this.settings.bdPath, args, { cwd, env }, callback);
 	}
 
 	async openCreateIssue(projectDir: string, parentId?: string): Promise<void> {
@@ -178,6 +182,19 @@ class BeadsSettingTab extends PluginSettingTab {
 						this.plugin.settings.bdPath = value;
 						await this.plugin.saveSettings();
 						refreshVersion();
+					}),
+			);
+
+		new Setting(containerEl)
+			.setName("Dolt password")
+			.setDesc("BEADS_DOLT_PASSWORD passed to bd commands (stored in plugin data, not committed)")
+			.addText((text) =>
+				text
+					.setPlaceholder("leave blank if not needed")
+					.setValue(this.plugin.settings.doltPassword)
+					.onChange(async (value) => {
+						this.plugin.settings.doltPassword = value;
+						await this.plugin.saveSettings();
 					}),
 			);
 

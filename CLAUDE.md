@@ -15,10 +15,9 @@ Output: `main.js` (bundled CJS), copied alongside `manifest.json` and `styles.cs
 
 **Note:** The user runs `npm run dev` separately in watch mode. Do NOT run builds — esbuild will pick up changes automatically.
 
-## Workflow
+## Agent Workflow
 
-- Commit after every completed beads issue (`bd close` then git commit).
-- Don't close bead until confirmed by human.
+See [AGENTS.md](./AGENTS.md) for the full development workflow, branching conventions, and beads usage rules.
 
 ## Architecture
 
@@ -31,17 +30,6 @@ src/
 - **Plugin entry** (`main.ts`): `BeadsPlugin.onload()` registers the `BeadsView`, adds a ribbon icon and command, and auto-opens the view on layout ready via `activateView()`.
 - **Sidebar view** (`BeadsView.ts`): `VIEW_TYPE_BEADS` constant identifies the view. Renders into the left leaf using Obsidian's DOM helpers (`containerEl.createEl`).
 - **Build** (`esbuild.config.mjs`): In dev mode, an `onEnd` plugin copies built files to the Obsidian vault. `obsidian` and codemirror packages are marked external.
-
-## Issue Tracking
-
-Uses Beads (`bd` CLI). Issues stored in `.beads/issues.jsonl`.
-
-```bash
-bd list              # view issues
-bd show <id>         # issue details
-bd create "title"    # new issue
-bd update <id> --status done
-```
 
 ## Useful docs
 

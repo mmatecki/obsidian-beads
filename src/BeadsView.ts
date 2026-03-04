@@ -283,12 +283,15 @@ export class BeadsView extends ItemView {
 				// e.g. "proj-8.1" is a child of "proj-8", "proj-8.1.2" is a child of "proj-8.1"
 				const { roots, childrenMap } = buildParentChildMap(issues);
 
-				// Sort newest-first at every level: IDs are sequential so the
-				// trailing integer is a reliable creation-order proxy.
-				const trailingNum = (id: string) =>
-					parseInt(id.match(/(\d+)$/)?.[1] ?? "0", 10);
-				const byNewest = (a: BeadIssue, b: BeadIssue) =>
-					trailingNum(b.id) - trailingNum(a.id);
+				// Sort newest-first at every level by created_at, falling back to trailing ID number.
+				const byNewest = (a: BeadIssue, b: BeadIssue) => {
+					if (a.created_at && b.created_at) {
+						return b.created_at.localeCompare(a.created_at);
+					}
+					const trailingNum = (id: string) =>
+						parseInt(id.match(/(\d+)$/)?.[1] ?? "0", 10);
+					return trailingNum(b.id) - trailingNum(a.id);
+				};
 
 				roots.sort(byNewest);
 				for (const siblings of childrenMap.values()) {
